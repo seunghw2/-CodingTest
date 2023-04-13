@@ -1,10 +1,10 @@
 # [unrated] 두 원 사이의 정수 쌍 - 181187 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/181187?language=python3) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/181187) 
 
 ### 성능 요약
 
-메모리: 10.1 MB, 시간: 362.06 ms
+메모리: 10.2 MB, 시간: 726.89 ms
 
 ### 구분
 
