@@ -19,7 +19,7 @@ def movMap(x, y, num):
         y -= 1
     elif num == 3:
         x -= 1
-    elif num == 4:
+    else:
         x += 1
 
     if 0 <= x < N and 0 <= y < M:
@@ -29,27 +29,14 @@ def movMap(x, y, num):
 
 
 def movDice(num):
-    tmp = dice.copy()
     if num == 1:
-        dice[1] = tmp[2]
-        dice[2] = tmp[3]
-        dice[3] = tmp[5]
-        dice[5] = tmp[1]
+        dice[1], dice[2], dice[3], dice[5] = dice[2], dice[3], dice[5], dice[1]
     elif num == 2:
-        dice[1] = tmp[5]
-        dice[2] = tmp[1]
-        dice[3] = tmp[2]
-        dice[5] = tmp[3]
+        dice[1], dice[2], dice[3], dice[5] = dice[5], dice[1], dice[2], dice[3]
     elif num == 3:
-        dice[0] = tmp[5]
-        dice[2] = tmp[0]
-        dice[4] = tmp[2]
-        dice[5] = tmp[4]
-    elif num == 4:
-        dice[0] = tmp[2]
-        dice[2] = tmp[4]
-        dice[4] = tmp[5]
-        dice[5] = tmp[0]
+        dice[0], dice[2], dice[4], dice[5] = dice[5], dice[0], dice[2], dice[4]
+    else:
+        dice[0], dice[2], dice[4], dice[5] = dice[2], dice[4], dice[5], dice[0]
 
 for k in seq:
     tmpx, tmpy = x, y
