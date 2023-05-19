@@ -5,12 +5,12 @@ for i in range(8):
         k = i
         break
 
-arr = [[] for _ in range(k+1)]
+arr = [set() for _ in range(k+1)]
 star = [[1 for _ in range(N)] for _ in range(N)]
 
 for i in range(1, k+1):
     for j in range(pow(3, i-1), 2*pow(3, i-1)):
-        arr[i].append(j)
+        arr[i].add(j)
 
 for y in range(N):
     for x in range(N):
