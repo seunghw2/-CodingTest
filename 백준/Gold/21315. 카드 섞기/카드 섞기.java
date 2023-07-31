@@ -24,6 +24,14 @@ class Main {
         return shffuledCards;
     }
 
+    public static boolean isSame(int N, List<Integer> l1, List<Integer> l2){
+        for(int i = 0; i < N; i++){
+            if(l1.get(i) != l2.get(i))
+                return false;
+        }
+        return true;
+    }
+
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int N = Integer.parseInt(br.readLine());
