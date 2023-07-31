@@ -15,11 +15,9 @@ class Main {
         int pow2k = (int)Math.pow(2, k);
 
         tmpFirst = copyList(cards, N-pow2k, N);
-        tmpSecond = new ArrayList<>(cards.subList(0, N - pow2k));
         tmpSecond = copyList(cards, 0, N-pow2k);
         tmpFirst.addAll(tmpSecond);
         shffuledCards = tmpFirst;
-//        System.out.println("First : " + k + " " + shffuledCards);
 
         while(pow2k > 1){
             pow2k = pow2k / 2;
@@ -30,17 +28,8 @@ class Main {
             tmpFirst.addAll(tmpSecond);
             tmpFirst.addAll(tmpThrid);
             shffuledCards = tmpFirst;
-//            System.out.println(">>>" + k + " " + shffuledCards);
         }
         return shffuledCards;
-    }
-
-    public static boolean isSame(int N, List<Integer> l1, List<Integer> l2){
-        for(int i = 0; i < N; i++){
-            if(l1.get(i) != l2.get(i))
-                return false;
-        }
-        return true;
     }
 
     public static void main(String[] args) throws IOException {
@@ -53,7 +42,6 @@ class Main {
             res.add(Integer.parseInt(st.nextToken()));
         }
 
-        double sqrtN = Math.sqrt(N);
         List<Integer> cards = new ArrayList<>();
         for(int i = 1; i < N+1; i++){
             cards.add(i);
