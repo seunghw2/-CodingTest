@@ -2,33 +2,25 @@ import java.io.*;
 import java.util.*;
 
 class Main {
-	public static List<Integer> copyList(List<Integer> list, int start, int end){
-		List<Integer> res = new ArrayList<>();
-		for(int i = start; i < end; i++) {
-			res.add(list.get(i));
-		}
-		return res;
-	}
-	
     public static List<Integer> shuffle(List<Integer> cards, int N, int k){
         List<Integer> shffuledCards, tmpFirst, tmpSecond, tmpThrid;
         int pow2k = (int)Math.pow(2, k);
 
-        tmpFirst = copyList(cards, N-pow2k, N);
-        tmpSecond = copyList(cards, 0, N-pow2k);
+        tmpFirst = new ArrayList<>(cards.subList(N - pow2k, N));
+        tmpSecond = new ArrayList<>(cards.subList(0, N - pow2k));
         tmpFirst.addAll(tmpSecond);
         shffuledCards = tmpFirst;
 
         while(pow2k > 1){
             pow2k = pow2k / 2;
-            tmpFirst = copyList(shffuledCards, pow2k, pow2k * 2);
-            tmpSecond = copyList(shffuledCards, 0, pow2k);
-            tmpThrid = copyList(shffuledCards, pow2k * 2, N);
-            
+            tmpFirst = new ArrayList<>(shffuledCards.subList(pow2k, pow2k * 2));
+            tmpSecond = new ArrayList<>(shffuledCards.subList(0, pow2k));
+            tmpThrid = new ArrayList<>(shffuledCards.subList(pow2k * 2, N));
             tmpFirst.addAll(tmpSecond);
             tmpFirst.addAll(tmpThrid);
             shffuledCards = tmpFirst;
         }
+        
         return shffuledCards;
     }
 
@@ -37,11 +29,12 @@ class Main {
         int N = Integer.parseInt(br.readLine());
         StringTokenizer st = new StringTokenizer(br.readLine());
 
-        List<Integer> res = new ArrayList<>();
+        List res = new ArrayList<>();
         for(int i = 0; i < N; i++){
             res.add(Integer.parseInt(st.nextToken()));
         }
 
+        double sqrtN = Math.sqrt(N);
         List<Integer> cards = new ArrayList<>();
         for(int i = 1; i < N+1; i++){
             cards.add(i);
@@ -58,7 +51,7 @@ class Main {
                 doubleShuffledCards = shuffle(firstShuffledCards, N, j);
                 if(doubleShuffledCards.equals(res)){
                     System.out.println(i+" "+j);
-                    return;
+                    break;
                 }
             }
         }
