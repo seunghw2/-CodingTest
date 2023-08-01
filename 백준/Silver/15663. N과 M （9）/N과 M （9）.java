@@ -5,10 +5,9 @@ public class Main {
 	public static int N, M;
 	public static StringBuilder sb = new StringBuilder();
 	public static Stack<Integer> stack = new Stack<>();
-	public static List<Integer> oriList = new ArrayList<>();
+	public static List<Integer> list = new ArrayList<>();
 	public static boolean[] isVisited;
-	public static Set<String> set = new HashSet<>();
-
+	
 	public static void main(String[] args) throws IOException {
 		List<String> ansList = new ArrayList<>();
 		
@@ -21,38 +20,39 @@ public class Main {
 		st = new StringTokenizer(br.readLine());
 		
 		for(int i = 0; i < N; i++) {
-			oriList.add(Integer.parseInt(st.nextToken()));
+			list.add(Integer.parseInt(st.nextToken()));
 		}
-		oriList.sort(null);
 		
 		isVisited = new boolean[N+1];
 		
+		list.sort(null);
 		dfs(0);
 		
+		for(String item: ansList) {
+			sb.append(item);
+		}
 		System.out.println(sb);
 	}
-
+	
 	private static void dfs(int depth) {
-		if (depth == M) {
-			StringBuilder tmp = new StringBuilder();
-			for (int item : stack) {
-				tmp.append(item).append(" ");
+		if(depth == M) {
+			for(int item: stack) {
+				sb.append(item).append(' ');
 			}
-			tmp.append("\n");
-			
-			if(!set.contains(tmp.toString())) {
-				set.add(tmp.toString());
-				sb.append(tmp.toString());
-			}
+			sb.append("\n");
 		}
-
-		for (int i = 0; i < oriList.size(); i++) {
-			if (!isVisited[i]) {
-				isVisited[i] = true;
-				stack.add(oriList.get(i));
-				dfs(depth + 1);
-				isVisited[i] = false;
-				stack.pop();
+		
+		int prev = 0;
+		for(int i = 0; i < N; i++) {
+			if(!isVisited[i]) {
+				if(list.get(i) != prev) {
+					prev = list.get(i);
+					isVisited[i] = true;
+					stack.add(list.get(i));
+					dfs(depth+1);
+					isVisited[i] = false;
+					stack.pop();
+				}
 			}
 		}
 	}
