@@ -28,9 +28,9 @@ public class Main {
 			if(dist < minDist)
 				minDist = dist;
 			
-			if(dist == 0) {
-				mbtis.clear();
-			}
+//			if(dist == 0) {
+//				mbtis.clear();
+//			}
 			
 			return;
 		}
@@ -48,9 +48,6 @@ public class Main {
 
 	public static void main(String[] args) throws IOException {
 		String mbtiTmp = "";
-//		Map<String, Integer> mbtiMap = new HashMap<>();
-
-//		BufferedReader br = new BufferedReader(new FileReader("input.txt"));
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		int T = Integer.parseInt(br.readLine());
 
@@ -65,16 +62,6 @@ public class Main {
 			for (int i = 0; i < N; i++) {
 				mbtiTmp = st.nextToken();
 				mbtis.add(mbtiTmp);
-				//				if(mbtiMap.containsKey(mbtiTmp)) {
-//					if(mbtiMap.get(mbtiTmp) < 3) {
-//						mbtis.add(mbtiTmp);
-//						mbtiMap.put(mbtiTmp, mbtiMap.get(mbtiTmp) + 1);
-//					}
-//				}
-//				else {
-//					mbtiMap.put(mbtiTmp, 1);
-//					mbtis.add(mbtiTmp);
-//				}
 			}
 
 			if(N > 32) {
