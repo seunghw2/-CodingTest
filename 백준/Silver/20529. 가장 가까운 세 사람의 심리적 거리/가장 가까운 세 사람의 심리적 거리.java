@@ -28,14 +28,10 @@ public class Main {
 			if(dist < minDist)
 				minDist = dist;
 			
-//			if(dist == 0) {
-//				mbtis.clear();
-//			}
-			
 			return;
 		}
 		
-		for(int i = num; i < mbtis.size(); i++) {
+		for(int i = num; i < N; i++) {
 			if(!isVisited[i]) {
 				stack.add(mbtis.get(i));
 				isVisited[i] = true;
