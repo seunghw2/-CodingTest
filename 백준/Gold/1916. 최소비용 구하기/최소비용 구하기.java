@@ -22,9 +22,7 @@ public class Main {
 		
 		List<List<Node>> graph = new ArrayList<>();
 
-		PriorityQueue<Node> pq = new PriorityQueue<>((n1, n2) -> {
-			return n1.idx - n2.idx;
-		});
+		Queue<Node> pq = new LinkedList<>();
 		
 		StringBuilder sb = new StringBuilder();
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
