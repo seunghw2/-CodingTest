@@ -31,8 +31,9 @@ class Main {
     	
     	for(int j = 1; j < N; j++) {
     		for(int i = 0; i < 3; i++) {
-    			dp[j][i][0] = arr[j][i] + maxCalc(i, j);
-    			dp[j][i][1] = arr[j][i] + minCalc(i, j);
+    			for(int k = 0; k < 2; k++) {
+    				dp[j][i][k] = arr[j][i] + calc(i, j, k);
+    			}
     		}
     	}
     	
@@ -47,54 +48,26 @@ class Main {
     		}
     	}
     	System.out.println(maxV + " " + minV);
-    	
-//    	for(int y = 0; y < N; y++) {
-//    		for(int x = 0; x < N; x++) {
-//    			System.out.print(dp[y][x][1] + " ");
-//    		}
-//    		System.out.println();
-//    	}
 	}
 
-	private static int maxCalc(int x, int y) {
+	private static int calc(int x, int y, int k) {
 		int a, b, c;
 		
 		if(x == 0) {
-			b = dp[y-1][x][0];
-			c = dp[y-1][x+1][0];
-			return Math.max(b, c);
+			b = dp[y-1][x][k];
+			c = dp[y-1][x+1][k];
+			return (k == 0) ? Math.max(b, c) : Math.min(b, c);
 		}
-		else if(x == 2) {
-			a = dp[y-1][x-1][0];
-			b = dp[y-1][x][0];
-			return Math.max(a, b);
-		}
-		else {
-			a = dp[y-1][x-1][0];
-			b = dp[y-1][x][0];
-			c = dp[y-1][x+1][0];
-			return Math.max(Math.max(a, b), c);
-		}
-	}
-
-	private static int minCalc(int x, int y) {
-		int a, b, c;
-		
-		if(x == 0) {
-			b = dp[y-1][x][1];
-			c = dp[y-1][x+1][1];
-			return Math.min(b, c);
-		}
-		else if(x == 2) {
-			a = dp[y-1][x-1][1];
-			b = dp[y-1][x][1];
-			return Math.min(a, b);
+		else if(x == 1){
+			a = dp[y-1][x-1][k];
+			b = dp[y-1][x][k];
+			c = dp[y-1][x+1][k];
+			return (k == 0) ? Math.max(Math.max(a, b), c) : Math.min(Math.min(a, b), c);
 		}
 		else {
-			a = dp[y-1][x-1][1];
-			b = dp[y-1][x][1];
-			c = dp[y-1][x+1][1];
-			return Math.min(Math.min(a, b), c);
+			a = dp[y-1][x-1][k];
+			b = dp[y-1][x][k];
+			return (k == 0) ? Math.max(a, b) : Math.min(a, b);
 		}
 	}
 }
