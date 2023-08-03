@@ -23,7 +23,7 @@ public class Main {
 		List<List<Node>> graph = new ArrayList<>();
 
 		PriorityQueue<Node> pq = new PriorityQueue<>((n1, n2) -> {
-			return n1.cost - n2.cost;
+			return n1.idx - n2.idx;
 		});
 		
 		StringBuilder sb = new StringBuilder();
