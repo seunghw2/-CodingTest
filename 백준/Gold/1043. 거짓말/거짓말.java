@@ -86,15 +86,4 @@ public class Main {
 		
 		return getParent(parent[p]);
 	}
-
-	private static void unionParent(int p1, int p2) {
-		int a = getParent(p1);
-		int b = getParent(p2);
-		
-		if(a < b)
-			parent[p2] = a;
-		else {
-			parent[p1] = b;
-		}
-	}
 }
