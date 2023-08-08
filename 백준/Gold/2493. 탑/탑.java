@@ -1,51 +1,39 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
-import java.util.Stack;
-import java.util.StringTokenizer;
+import java.util.Deque;
+import java.util.LinkedList;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringBuilder sb = new StringBuilder();
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        int N;
-        int idx;
-        int[] arr, res;
-        boolean isValid;
-        Stack<Integer> stack = new Stack<>();
+		int n = Integer.parseInt(br.readLine());
+		String[] inputs = br.readLine().split(" ");
 
-        N = Integer.parseInt(br.readLine());
-        StringTokenizer st = new StringTokenizer(br.readLine());
+		int[] buildings = new int[n];
+		int[] ans = new int[n];
 
-        arr = new int[N];
-        res = new int[N];
-        for(int i= 0; i < N; i++){
-            arr[i] = Integer.parseInt(st.nextToken());
-        }
+		StringBuilder sb = new StringBuilder();
 
-        for(int i = N-1; i >= 0; i--){
-        	while (!stack.isEmpty() && arr[i] > arr[stack.peek()]) {
-        		res[stack.peek()] = i+1;
-        		stack.pop();
-        	}
-        	stack.add(i);
-        }
-        
-        isValid = false;
-        for(int item: res)
-            if(item != 0){
-                isValid = true;
-                break;
-            }
+		for (int i = 0; i < n; i++) {
+			buildings[i] = Integer.parseInt(inputs[i]);
+		}
 
-        if(isValid)
-            for(int item: res)
-                sb.append(item).append(" ");
-        else
-            sb.append(0);
+		Deque<Integer> stack = new LinkedList<>();
 
-        System.out.println(sb);
-    }
-}
+		for (int i = n - 1; i >= 0; i--) {
+			while (!stack.isEmpty() && buildings[stack.peekLast()] < buildings[i]) {
+				int idx = stack.pollLast();
+				ans[idx] = i + 1;
+			}
+			stack.offerLast(i);
+		}
+
+			for (int i = 0; i < n; i++) {
+				sb.append(ans[i]).append(" ");
+			}
+			System.out.println(sb);
+		}
+
+	}
