@@ -10,8 +10,7 @@ public class Main {
 	public static void main(String[] args) throws IOException {
 //		BufferedReader br = new BufferedReader(new FileReader("input.txt"));
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-		double grad;
+		StringBuilder sb = new StringBuilder();
 
 		StringTokenizer st = new StringTokenizer(br.readLine());
 		N = Integer.parseInt(st.nextToken());
@@ -29,54 +28,52 @@ public class Main {
 			}
 		}
 
-		for(int r = 0; r < R; r++)
+		for (int r = 0; r < R; r++)
 			Rotate(0);
-		
-		for(int[] items: arr) {
-			for(int item: items) {
-				System.out.print(item + " ");
-			}
-			System.out.println();
-		}
-		System.out.println();
 
+		for (int[] items : arr) {
+			for (int item : items) {
+				sb.append(item).append(" ");
+			}
+			sb.append("\n");
+		}
+		System.out.println(sb);
 	}
 
 	private static void Rotate(int d) {
-		if(d == depth)
+		if (d == depth)
 			return;
-		
+
 		int startx = d;
 		int starty = d;
 		int lastx = M - d - 1;
 		int lasty = N - d - 1;
-		
+
 //		System.out.println(startx);
 //		System.out.println(starty);
 //		System.out.println(lastx);
 //		System.out.println(lasty);
-		
-		int tmp = arr[starty][startx];
-		
-		for(int x = startx; x < lastx; x++)
-			arr[starty][x] = arr[starty][x+1];
-		
-		for(int y = starty; y < lasty; y++)
-			arr[y][lastx] = arr[y+1][lastx]; 
 
-		for(int x = lastx; x > startx; x--)
-			arr[lasty][x] = arr[lasty][x-1];
-		
-		for(int y = lasty; y > starty; y--)
-			arr[y][startx] = arr[y-1][startx];
-		
-		if(starty != lasty)
-			arr[starty+1][startx] = tmp;
-		else
-			if(startx != lastx)
-				arr[starty][startx+1] = tmp;
-		
+		int tmp = arr[starty][startx];
+
+		for (int x = startx; x < lastx; x++)
+			arr[starty][x] = arr[starty][x + 1];
+
+		for (int y = starty; y < lasty; y++)
+			arr[y][lastx] = arr[y + 1][lastx];
+
+		for (int x = lastx; x > startx; x--)
+			arr[lasty][x] = arr[lasty][x - 1];
+
+		for (int y = lasty; y > starty; y--)
+			arr[y][startx] = arr[y - 1][startx];
+
+		if (starty != lasty)
+			arr[starty + 1][startx] = tmp;
+		else if (startx != lastx)
+			arr[starty][startx + 1] = tmp;
+
 		Rotate(d + 1);
-		
+
 	}
 }
