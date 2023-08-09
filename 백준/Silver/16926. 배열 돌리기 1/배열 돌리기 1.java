@@ -11,9 +11,6 @@ public class Main {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringBuilder sb = new StringBuilder();
 
-		int cnt;
-		int GBD = 1;
-
 		StringTokenizer st = new StringTokenizer(br.readLine());
 		N = Integer.parseInt(st.nextToken());
 		M = Integer.parseInt(st.nextToken());
@@ -30,19 +27,7 @@ public class Main {
 			}
 		}
 
-//		cnt = 2 * (N + M - 2);
-//		for(int i = 0; i < depth; i++) {
-//			if(cnt == 0)
-//				break;
-//			GBD = GBD * cnt / GCD(GBD, cnt);
-//			cnt -= 8;
-//		}
-//		
-//		System.out.println(GBD);
-//		System.out.println(R % GBD);
-		
-		for (int r = 0; r < R; r++)
-			Rotate(0);
+		Rotate(0);
 
 		for (int[] items : arr) {
 			for (int item : items) {
@@ -74,27 +59,31 @@ public class Main {
 		int starty = d;
 		int lastx = M - d - 1;
 		int lasty = N - d - 1;
+		
+		int cnt = 2 * (lastx - startx + lasty - starty);
 
 //		System.out.println(startx);
 //		System.out.println(starty);
 //		System.out.println(lastx);
 //		System.out.println(lasty);
-
-		int tmp = arr[starty][startx];
-
-		for (int x = startx; x < lastx; x++)
-			arr[starty][x] = arr[starty][x + 1];
-
-		for (int y = starty; y < lasty; y++)
-			arr[y][lastx] = arr[y + 1][lastx];
-
-		for (int x = lastx; x > startx; x--)
-			arr[lasty][x] = arr[lasty][x - 1];
-
-		for (int y = lasty; y > starty; y--)
-			arr[y][startx] = arr[y - 1][startx];
 		
-		arr[starty + 1][startx] = tmp;
+		for(int i = 0; i < R % cnt; i++) {
+			int tmp = arr[starty][startx];
+			
+			for (int x = startx; x < lastx; x++)
+				arr[starty][x] = arr[starty][x + 1];
+			
+			for (int y = starty; y < lasty; y++)
+				arr[y][lastx] = arr[y + 1][lastx];
+			
+			for (int x = lastx; x > startx; x--)
+				arr[lasty][x] = arr[lasty][x - 1];
+			
+			for (int y = lasty; y > starty; y--)
+				arr[y][startx] = arr[y - 1][startx];
+			
+			arr[starty + 1][startx] = tmp;
+		}
 
 		Rotate(d + 1);
 
