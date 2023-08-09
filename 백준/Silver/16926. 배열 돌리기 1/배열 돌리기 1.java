@@ -94,10 +94,7 @@ public class Main {
 		for (int y = lasty; y > starty; y--)
 			arr[y][startx] = arr[y - 1][startx];
 		
-		if (starty != lasty)
-			arr[starty + 1][startx] = tmp;
-		else if (startx != lastx)
-			arr[starty][startx + 1] = tmp;
+		arr[starty + 1][startx] = tmp;
 
 		Rotate(d + 1);
 
