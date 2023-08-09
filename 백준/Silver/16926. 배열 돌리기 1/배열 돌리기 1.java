@@ -1,6 +1,5 @@
 import java.io.*;
-import java.util.Arrays;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class Main {
 	public static int[][] arr;
@@ -12,12 +11,15 @@ public class Main {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringBuilder sb = new StringBuilder();
 
+		int cnt;
+		int GBD = 1;
+
 		StringTokenizer st = new StringTokenizer(br.readLine());
 		N = Integer.parseInt(st.nextToken());
 		M = Integer.parseInt(st.nextToken());
 		R = Integer.parseInt(st.nextToken());
-
-		depth = (Math.min(N, M) + 1) / 2;
+		
+		depth = (Math.min(N, M)) / 2;
 
 		arr = new int[N][M];
 
@@ -28,6 +30,17 @@ public class Main {
 			}
 		}
 
+//		cnt = 2 * (N + M - 2);
+//		for(int i = 0; i < depth; i++) {
+//			if(cnt == 0)
+//				break;
+//			GBD = GBD * cnt / GCD(GBD, cnt);
+//			cnt -= 8;
+//		}
+//		
+//		System.out.println(GBD);
+//		System.out.println(R % GBD);
+		
 		for (int r = 0; r < R; r++)
 			Rotate(0);
 
@@ -38,6 +51,19 @@ public class Main {
 			sb.append("\n");
 		}
 		System.out.println(sb);
+	}
+
+	private static int GCD(int a, int b) {
+		if(a < b) {
+			int tmp = a;
+			a = b;
+			b = tmp;
+		}
+			
+		if(b == 0)
+			return a;
+		else
+			return GCD(a % b, b);
 	}
 
 	private static void Rotate(int d) {
@@ -67,7 +93,7 @@ public class Main {
 
 		for (int y = lasty; y > starty; y--)
 			arr[y][startx] = arr[y - 1][startx];
-
+		
 		if (starty != lasty)
 			arr[starty + 1][startx] = tmp;
 		else if (startx != lastx)
